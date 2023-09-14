@@ -31,39 +31,6 @@ class _TodayRecommendScreenState extends State<TodayRecommendScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.green,
-        title: Text('upcloth'),
-        centerTitle: true,
-      ),
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-            border: Border(top: BorderSide(color: Colors.grey, width: 1.0))),
-        child: BottomNavigationBar(
-          onTap: (value) {
-            setState(() {
-              _pageIndex = value;
-            });
-          },
-          currentIndex: _pageIndex,
-          selectedItemColor: Colors.black,
-          unselectedItemColor: Colors.black,
-          type: BottomNavigationBarType.shifting,
-          showSelectedLabels: false,
-          // 선택된 라벨 보이기/숨기기
-          showUnselectedLabels: false,
-          // 선택되지 않은 라벨 보이기/숨기기
-          items: const [
-            BottomNavigationBarItem(
-                icon: Icon(Icons.view_headline_sharp), label: 'list'),
-            BottomNavigationBarItem(icon: Icon(Icons.search), label: 'search'),
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'home'),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'myPage'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.shopping_cart), label: 'cart'),
-          ],
-        ),
-      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
