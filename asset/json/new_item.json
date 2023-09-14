@@ -1,0 +1,42 @@
+[
+  {
+    "상품명" : "new_item_test1",
+    "이미지" : "test1.png"
+  },
+  {
+    "상품명" : "new_item_test2",
+    "이미지" : "test2.png"
+  },
+  {
+    "상품명" : "new_item_test3",
+    "이미지" : "test3.png"
+  },
+  {
+    "상품명" : "new_item_test4",
+    "이미지" : "test4.png"
+  },
+  {
+    "상품명" : "new_item_test5",
+    "이미지" : "test5.png"
+  },
+  {
+    "상품명" : "new_item_test6",
+    "이미지" : "test6.png"
+  },
+  {
+    "상품명" : "new_item_test7",
+    "이미지" : "test7.png"
+  },
+  {
+    "상품명" : "new_item_test8",
+    "이미지" : "test8.png"
+  },
+  {
+    "상품명" : "new_item_test9",
+    "이미지" : "test9.png"
+  },
+  {
+    "상품명" : "new_item_test10",
+    "이미지" : "test10.png"
+  }
+]

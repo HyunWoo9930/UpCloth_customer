@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:upcloth/screen/new_item_screen.dart';
+import 'package:upcloth/screen/today_recommend_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -124,21 +126,25 @@ class _MainScreenState extends State<MainScreen> {
                             IconButton(
                               onPressed: () {},
                               icon: const Icon(Icons.square_rounded),
+                              color: Colors.grey,
                               iconSize: 75,
                             ),
                             IconButton(
                               onPressed: () {},
                               icon: const Icon(Icons.square_rounded),
+                              color: Colors.grey,
                               iconSize: 75,
                             ),
                             IconButton(
                               onPressed: () {},
                               icon: const Icon(Icons.square_rounded),
+                              color: Colors.grey,
                               iconSize: 75,
                             ),
                             IconButton(
                               onPressed: () {},
                               icon: const Icon(Icons.square_rounded),
+                              color: Colors.grey,
                               iconSize: 75,
                             ),
                           ],
@@ -146,7 +152,12 @@ class _MainScreenState extends State<MainScreen> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 50),
                           child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (BuildContext context) {
+                                  return TodayRecommendScreen();
+                                }));
+                              },
                               style: ElevatedButton.styleFrom(
                                 primary: Colors.grey,
                               ),
@@ -170,21 +181,25 @@ class _MainScreenState extends State<MainScreen> {
                             IconButton(
                               onPressed: () {},
                               icon: const Icon(Icons.square_rounded),
+                              color: Colors.grey,
                               iconSize: 75,
                             ),
                             IconButton(
                               onPressed: () {},
                               icon: const Icon(Icons.square_rounded),
+                              color: Colors.grey,
                               iconSize: 75,
                             ),
                             IconButton(
                               onPressed: () {},
                               icon: const Icon(Icons.square_rounded),
+                              color: Colors.grey,
                               iconSize: 75,
                             ),
                             IconButton(
                               onPressed: () {},
                               icon: const Icon(Icons.square_rounded),
+                              color: Colors.grey,
                               iconSize: 75,
                             ),
                           ],
@@ -192,7 +207,12 @@ class _MainScreenState extends State<MainScreen> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 50),
                           child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (BuildContext context) {
+                                  return NewItemScreen();
+                                }));
+                              },
                               style: ElevatedButton.styleFrom(
                                 primary: Colors.grey,
                               ),
@@ -237,4 +257,3 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 }
-
