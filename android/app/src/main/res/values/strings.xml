@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+    <string name="client_id">EYOfJMaPwN0JrEfEbT36</string>
+    <string name="client_secret">tohuDnKMNt</string>
+    <string name="client_name">social_login_app</string>
+</resources>
