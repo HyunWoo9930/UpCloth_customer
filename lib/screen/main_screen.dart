@@ -55,53 +55,55 @@ class _MainScreenState extends State<MainScreen> {
           padding: const EdgeInsets.all(15.0),
           child: Column(
             children: [
-              SizedBox(
-                height: 100,
-                child: PageView(
-                  controller: _pageController,
-                  onPageChanged: (int page) {
-                    setState(() {
-                      _currentPage = page;
-                    });
-                  },
-                  children: [
-                    buildBanner('Banner 1', 0),
-                    buildBanner('Banner 2', 1),
-                    buildBanner('Banner 3', 2),
-                  ],
-                ),
-              ),
+              Banner(),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.circle),
-                      iconSize: 60,
-                      color: Colors.grey,
+                child: Container(
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.circle),
+                          iconSize: 60,
+                          color: Colors.red,
+                        ),
+                        IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.circle),
+                          iconSize: 60,
+                          color: Colors.yellow,
+                        ),
+                        IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.circle),
+                          iconSize: 60,
+                          color: Colors.orange,
+                        ),
+                        IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.circle),
+                          iconSize: 60,
+                          color: Colors.green,
+                        ),
+                        IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.circle),
+                          iconSize: 60,
+                          color: Colors.blue,
+                        ),
+                        IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.circle),
+                          iconSize: 60,
+                          color: Colors.purple,
+                        ),
+                      ],
                     ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.circle),
-                      iconSize: 60,
-                      color: Colors.grey,
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.circle),
-                      iconSize: 60,
-                      color: Colors.grey,
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.circle),
-                      iconSize: 60,
-                      color: Colors.grey,
-                    ),
-                  ],
+                  ),
                 ),
               ),
               Expanded(
@@ -215,4 +217,24 @@ class _MainScreenState extends State<MainScreen> {
       child: Center(child: Text(text)),
     );
   }
+
+  Widget Banner() {
+    return SizedBox(
+      height: 100,
+      child: PageView(
+        controller: _pageController,
+        onPageChanged: (int page) {
+          setState(() {
+            _currentPage = page;
+          });
+        },
+        children: [
+          buildBanner('Banner 1', 0),
+          buildBanner('Banner 2', 1),
+          buildBanner('Banner 3', 2),
+        ],
+      ),
+    );
+  }
 }
+

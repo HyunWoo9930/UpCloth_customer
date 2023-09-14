@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_login/flutter_naver_login.dart';
-import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:upcloth/screen/main_screen.dart';
 
-class HomeScreenCustomer extends StatelessWidget {
-  const HomeScreenCustomer({super.key});
+class LoginScreenCustomer extends StatelessWidget {
+  const LoginScreenCustomer({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -183,15 +182,6 @@ class _convenient_loginState extends State<_convenient_login> {
               height: 60,
             ),
           ),
-          IconButton(
-              onPressed: kakaoLogin,
-              icon: Ink.image(
-                image: AssetImage(
-                  'asset/img/kakao_logo.png',
-                ),
-                width: 60,
-                height: 60,
-              )),
         ]),
       ],
     );
@@ -207,14 +197,5 @@ class _convenient_loginState extends State<_convenient_login> {
         return MainScreen();
       }));
     }
-  }
-
-  void kakaoLogin() async {
-    var user = await UserApi.instance.loginWithKakaoAccount();
-    print('user = $user');
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (BuildContext context) {
-      return MainScreen();
-    }));
   }
 }
