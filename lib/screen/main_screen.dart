@@ -15,7 +15,6 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-
   int _currentIndex = 0;
   bool showTodayRecommendScreen = false;
   bool showNewItemScreen = false;
@@ -25,6 +24,7 @@ class _MainScreenState extends State<MainScreen> {
       showTodayRecommendScreen = true;
     });
   }
+
   void _showNewItem() {
     setState(() {
       showNewItemScreen = true;
@@ -36,15 +36,43 @@ class _MainScreenState extends State<MainScreen> {
     final List<Widget> _screens = [
       ListScreen(),
       SearchScreen(),
-      HomeScreen(showTodayRecommend: _showTodayRecommend, showNewItem: _showNewItem,),
+      HomeScreen(
+        showTodayRecommend: _showTodayRecommend,
+        showNewItem: _showNewItem,
+      ),
       MyPageScreen(),
       ShoppingCartScreen(),
       TodayRecommendScreen(),
     ];
 
     return Scaffold(
-      appBar: _appBar(),
-      body: showTodayRecommendScreen ? TodayRecommendScreen() : showNewItemScreen ? NewItemScreen() : _screens[_currentIndex],
+      appBar: AppBar(
+        backgroundColor: Colors.green,
+        title: Text('upcloth'),
+        centerTitle: true,
+        leading: showTodayRecommendScreen // 오늘의 추천 더보기 가 켜져있을때, 뒤로가기를 누르면 false
+            ? IconButton(
+                onPressed: () {
+                  setState(() {
+                    showTodayRecommendScreen = false;
+                  });
+                },
+                icon: Icon(Icons.arrow_back))
+            : showNewItemScreen
+                ? IconButton(
+                    onPressed: () {
+                      setState(() {
+                        showTodayRecommendScreen = false;
+                      });
+                    },
+                    icon: Icon(Icons.arrow_back))
+                : null,
+      ),
+      body: showTodayRecommendScreen
+          ? TodayRecommendScreen()
+          : showNewItemScreen
+              ? NewItemScreen()
+              : _screens[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (index) {
@@ -70,13 +98,4 @@ class _MainScreenState extends State<MainScreen> {
       ),
     );
   }
-}
-
-/// AppBar
-PreferredSizeWidget _appBar() {
-  return AppBar(
-    backgroundColor: Colors.green,
-    title: Text('upcloth'),
-    centerTitle: true,
-  );
 }
