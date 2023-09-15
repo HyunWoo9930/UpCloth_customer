@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:upcloth/screen/home_screen.dart';
-import 'package:upcloth/screen/list_screen.dart';
-import 'package:upcloth/screen/mypage_screen.dart';
-import 'package:upcloth/screen/new_item_screen.dart';
-import 'package:upcloth/screen/search_screen.dart';
-import 'package:upcloth/screen/shopping_cart_screen.dart';
-import 'package:upcloth/screen/today_recommend_screen.dart';
+import 'package:upcloth/screen/home/home_screen.dart';
+import 'package:upcloth/screen/list/list_screen.dart';
+import 'package:upcloth/screen/mypage/mypage_screen.dart';
+import 'package:upcloth/screen/home/new_item_screen.dart';
+import 'package:upcloth/screen/search/search_screen.dart';
+import 'package:upcloth/screen/shoppingCart/shopping_cart_screen.dart';
+
+import 'home/today_recommend_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -15,7 +16,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int _currentIndex = 0;
+  int _currentIndex = 2; // 첫 화면을 home_screen으로 설정하기 위함.
   bool showTodayRecommendScreen = false;
   bool showNewItemScreen = false;
 
@@ -42,7 +43,6 @@ class _MainScreenState extends State<MainScreen> {
       ),
       MyPageScreen(),
       ShoppingCartScreen(),
-      TodayRecommendScreen(),
     ];
 
     return Scaffold(

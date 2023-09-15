@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_login/flutter_naver_login.dart';
-import 'package:upcloth/screen/home_screen.dart';
+import 'package:upcloth/screen/home/home_screen.dart';
 import 'package:upcloth/screen/main_screen.dart';
 
 class LoginScreenCustomer extends StatelessWidget {
