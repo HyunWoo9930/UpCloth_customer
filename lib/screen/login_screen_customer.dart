@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_login/flutter_naver_login.dart';
-import 'package:upcloth/screen/home/home_screen.dart';
+import 'package:upcloth/constant/color.dart';
 import 'package:upcloth/screen/main_screen.dart';
 
 class LoginScreenCustomer extends StatelessWidget {
@@ -9,26 +9,46 @@ class LoginScreenCustomer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.blue,
-        title: Text('upcloth'),
-        centerTitle: true,
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          const Text(
-            '업클로스 방문을 환영합니다!',
-            style: TextStyle(
-              fontSize: 20.0,
-              fontWeight: FontWeight.w700,
-            ),
+      body: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).unfocus();
+        },
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              _Header(),
+              _IdPwd(),
+              _loginButton(),
+              _convenient_login(),
+            ],
           ),
-          _IdPwd(),
-          _loginButton(),
-          _convenient_login(),
-        ],
+        ),
       ),
+    );
+  }
+}
+
+class _Header extends StatelessWidget {
+  const _Header({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SizedBox(
+          height: 250,
+        ),
+        Icon(
+          Icons.recycling,
+          size: 100,
+          color: GREEN_COLOR,
+        ),
+        Text(
+          'UPCloth',
+          style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+        )
+      ],
     );
   }
 }
@@ -54,66 +74,90 @@ class _IdPwdState extends State<_IdPwd> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          TextField(
-              controller: _usernameController,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Username',
-              )),
-          TextField(
-              controller: _passwordController,
-              obscureText: true,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: '*****',
-              )),
           SizedBox(
             height: 10,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Checkbox(
-                  value: _isChecked,
-                  onChanged: (bool? val) {
-                    if (val != null) {
-                      setState(() {
-                        _isChecked = val;
-                      });
-                    }
-                  }),
-              Text(
-                '자동 로그인',
-                style: TextStyle(fontSize: 30.0),
-              )
-            ],
+          SizedBox(
+            height: 40,
+            child: TextField(
+                style: TextStyle(
+                    color: Color(0xFF858585), fontWeight: FontWeight.bold),
+                controller: _usernameController,
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Color(0xFFF3F3F3),
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(100.0)),
+                      borderSide: BorderSide(color: Colors.transparent)),
+                  hintText: '아이디',
+                )),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          SizedBox(
+            height: 40,
+            child: TextField(
+                style: TextStyle(
+                    color: Color(0xFF858585), fontWeight: FontWeight.bold),
+                controller: _passwordController,
+                obscureText: true,
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Color(0xFFF3F3F3),
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(100.0)),
+                      borderSide: BorderSide(color: Colors.transparent)),
+                  hintText: '패스워드',
+                )),
+          ),
+          SizedBox(
+            height: 10,
           ),
           ElevatedButton(
-              onPressed: () {},
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(primary: Colors.blue),
-                onPressed: _login,
-                child: const Text(
-                  '로그인',
-                  style: TextStyle(fontSize: 30.0),
-                ),
-              )),
+            style: ElevatedButton.styleFrom(
+                primary: Color(0xFF1EA43B),
+                padding: EdgeInsets.all(8),
+                shape: StadiumBorder()),
+            onPressed: _login,
+            child: const Text(
+              '로그인',
+              style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold),
+            ),
+          ),
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             TextButton(
                 onPressed: () {
                   print('아이디 찾기 클릭!!');
                 },
-                child: Text('아이디 찾기')),
+                child: Text(
+                  '아이디 찾기',
+                  style: TextStyle(color: Color(0xFF8E8E8E)),
+                )),
+            Text(
+              '|',
+              style: TextStyle(color: Color(0xFF8E8E8E)),
+            ),
             TextButton(
                 onPressed: () {
                   print('비밀번호 찾기 클릭!!');
                 },
-                child: Text('비밀번호 찾기')),
+                child: Text(
+                  '비밀번호 찾기',
+                  style: TextStyle(color: Color(0xFF8E8E8E)),
+                )),
+            Text(
+              '|',
+              style: TextStyle(color: Color(0xFF8E8E8E)),
+            ),
             TextButton(
                 onPressed: () {
                   print('회원가입 클릭!!');
                 },
-                child: Text('회원가입')),
+                child: Text(
+                  '회원가입',
+                  style: TextStyle(color: Color(0xFF8E8E8E)),
+                )),
           ]),
         ],
       ),
@@ -168,19 +212,45 @@ class _convenient_loginState extends State<_convenient_login> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Text(
-          '간편 로그인',
-          style: TextStyle(fontSize: 25.0),
+        SizedBox(
+          height: 30,
         ),
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-          IconButton(
-            onPressed: naverLogin,
-            icon: Ink.image(
-              image: AssetImage(
-                'asset/img/naver_logo.png',
+          Padding(
+            padding: const EdgeInsets.only(right: 60),
+            child: InkWell(
+              onTap: naverLogin,
+              child: Container(
+                width: 50,
+                height: 50,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(color: Colors.transparent), // 테두리 설정
+                    borderRadius: BorderRadius.circular(8.0), // 사각형의 모서리 둥글게
+                    image: DecorationImage(
+                      image: const AssetImage('asset/img/naver_login.png'),
+                      fit: BoxFit.cover,
+                    )),
               ),
-              width: 60,
-              height: 60,
+            ),
+          ),
+          InkWell(
+            onTap: () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('카카오톡 간편 로그인은 개발중입니다!')),
+              );
+            },
+            child: Container(
+              width: 50,
+              height: 50,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(color: Colors.transparent), // 테두리 설정
+                  borderRadius: BorderRadius.circular(8.0), // 사각형의 모서리 둥글게
+                  image: DecorationImage(
+                    image: const AssetImage('asset/img/kakao_login.png'),
+                    fit: BoxFit.cover,
+                  )),
             ),
           ),
         ]),

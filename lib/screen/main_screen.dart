@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:upcloth/screen/home/home_screen.dart';
-import 'package:upcloth/screen/list/list_screen.dart';
 import 'package:upcloth/screen/mypage/mypage_screen.dart';
 import 'package:upcloth/screen/home/new_item_screen.dart';
-import 'package:upcloth/screen/search/search_screen.dart';
+import 'package:upcloth/screen/request/request_screen.dart';
+import 'package:upcloth/screen/shopping/shopping_screen.dart';
 import 'package:upcloth/screen/shoppingCart/shopping_cart_screen.dart';
 
+import 'home/home_screen2.dart';
 import 'home/today_recommend_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -35,39 +36,15 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     final List<Widget> _screens = [
-      ListScreen(),
-      SearchScreen(),
-      HomeScreen(
+      HomeScreen2(
         showTodayRecommend: _showTodayRecommend,
-        showNewItem: _showNewItem,
-      ),
+        showNewItem: _showNewItem,),
+      ShoppingScreen(),
+      RequestScreen(),
       MyPageScreen(),
-      ShoppingCartScreen(),
     ];
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.green,
-        title: Text('upcloth'),
-        centerTitle: true,
-        leading: showTodayRecommendScreen // 오늘의 추천 더보기 가 켜져있을때, 뒤로가기를 누르면 false
-            ? IconButton(
-                onPressed: () {
-                  setState(() {
-                    showTodayRecommendScreen = false;
-                  });
-                },
-                icon: Icon(Icons.arrow_back))
-            : showNewItemScreen
-                ? IconButton(
-                    onPressed: () {
-                      setState(() {
-                        showTodayRecommendScreen = false;
-                      });
-                    },
-                    icon: Icon(Icons.arrow_back))
-                : null,
-      ),
       body: showTodayRecommendScreen
           ? TodayRecommendScreen()
           : showNewItemScreen
@@ -82,14 +59,12 @@ class _MainScreenState extends State<MainScreen> {
             _currentIndex = index;
           });
         },
-        items: [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.view_headline_sharp), label: 'list'),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: 'search'),
+        items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'home'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'person'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_cart), label: 'shopping_cart'),
+              icon: Icon(Icons.shopping_bag_rounded), label: 'list'),
+          BottomNavigationBarItem(icon: Icon(Icons.file_copy_rounded), label: 'search'),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'person'),
         ],
         unselectedItemColor: Colors.black,
         selectedItemColor: Colors.black,
