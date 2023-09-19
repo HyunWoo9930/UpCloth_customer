@@ -54,9 +54,9 @@ class _MainScreenState extends State<MainScreen> {
 
     return Scaffold(
       body: showTodayRecommendScreen
-          ? TodayRecommendScreen()
+          ? ShoppingScreen()
           : showNewItemScreen
-              ? NewItemScreen()
+              ? ShoppingScreen()
               : _screens[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,

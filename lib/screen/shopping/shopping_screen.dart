@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:upcloth/enum/shopping/sub_category_enum.dart';
+import 'package:upcloth/screen/shopping/item_screen.dart';
 
 import '../../constant/color.dart';
 import '../../enum/shopping/top_category_enum.dart';
@@ -261,6 +262,10 @@ class _ItemsState extends State<_Items> {
                         padding: const EdgeInsets.all(8.0),
                         child: InkWell(
                           onTap: () {
+                            Navigator.of(context)
+                                .push<Map<String, dynamic>>(MaterialPageRoute(builder: (BuildContext context) {
+                              return ItemScreen(itemMap: itemMap);
+                            }));
                             print('${itemMap['상품명']} clicked!!!');
                           },
                           child: Stack(
