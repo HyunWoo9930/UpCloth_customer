@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:upcloth/screen/home/home_screen.dart';
 import 'package:upcloth/screen/mypage/mypage_screen.dart';
 import 'package:upcloth/screen/home/new_item_screen.dart';
@@ -31,12 +32,21 @@ class _MainScreenState extends State<MainScreen> {
     });
   }
 
+  void onItemClicked(int index) {
+    setState(() {
+      showTodayRecommendScreen = false;
+      showNewItemScreen = false;
+      _currentIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final List<Widget> _screens = [
       HomeScreen(
         showTodayRecommend: _showTodayRecommend,
-        showNewItem: _showNewItem,),
+        showNewItem: _showNewItem,
+      ),
       ShoppingScreen(),
       RequestScreen(),
       MyPageScreen(),
@@ -51,21 +61,26 @@ class _MainScreenState extends State<MainScreen> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (index) {
-          setState(() {
-            showTodayRecommendScreen = false;
-            showNewItemScreen = false;
-            _currentIndex = index;
-          });
+          onItemClicked(index);
         },
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'home'),
+        items: [
           BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_bag_rounded), label: 'list'),
-          BottomNavigationBarItem(icon: Icon(Icons.file_copy_rounded), label: 'search'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'person'),
+            label: 'home',
+            icon: SvgPicture.asset('asset/icon/home.svg', color: _currentIndex == 0 ? Color(0xFF1EA43B) : Color(0xFF888888)),
+          ),
+          BottomNavigationBarItem(
+            label: 'list',
+            icon: SvgPicture.asset('asset/icon/list.svg', color: _currentIndex == 1 ? Color(0xFF1EA43B) : Color(0xFF888888)),
+          ),
+          BottomNavigationBarItem(
+            label: 'search',
+            icon: SvgPicture.asset('asset/icon/search.svg', color: _currentIndex == 2 ? Color(0xFF1EA43B) : Color(0xFF888888)),
+          ),
+          BottomNavigationBarItem(
+            label: 'person',
+            icon: SvgPicture.asset('asset/icon/person.svg', color: _currentIndex == 3 ? Color(0xFF1EA43B) : Color(0xFF888888)),
+          ),
         ],
-        unselectedItemColor: Colors.black,
-        selectedItemColor: Colors.black,
         showSelectedLabels: false,
         showUnselectedLabels: false,
       ),

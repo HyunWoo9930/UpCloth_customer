@@ -153,48 +153,54 @@ class _SubCategory extends StatefulWidget {
 
 class _SubCategoryState extends State<_SubCategory> {
   List<SubCategory> subCategories = SubCategory.values;
+  int _selectedButtonIndex = 0;
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding: EdgeInsets.zero,
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: subCategories
-            .asMap()
-            .entries
-            .map((category) => Padding(
-                  padding:
-                      EdgeInsets.only(left: category.key == 0.0 ? 0.0 : 8.0),
-                  child: SizedBox(
-                    width: 74.0,
-                    height: 32.0,
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                          primary: Colors.white,
-                          backgroundColor: Colors.white,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                              side: BorderSide.none),
-                          elevation: 8,
-                          shadowColor: Colors.black,
-                          padding: EdgeInsets.all(1.0)),
-                      onPressed: () {
-                        print('$category clicked!!');
-                      },
-                      child: Text(
-                        SubCategoryName[category.value] ?? '',
-                        style: const TextStyle(
-                            fontFamily: 'Inter',
-                            color: Colors.black,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 12),
+    return Container(
+      width: double.infinity,
+      child: SingleChildScrollView(
+        padding: EdgeInsets.zero,
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: subCategories
+              .asMap()
+              .entries
+              .map((category) => Padding(
+                    padding:
+                        EdgeInsets.only(left: category.key == 0.0 ? 0.0 : 8.0),
+                    child: SizedBox(
+                      width: 96.0,
+                      height: 32.0,
+                      child: TextButton(
+                        style: TextButton.styleFrom(
+                            primary: Colors.white,
+                            backgroundColor: _selectedButtonIndex == category.key ? GREEN_COLOR : Colors.white,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12.0),
+                                side: BorderSide.none),
+                            elevation: 8,
+                            shadowColor: Colors.black),
+                        onPressed: () {
+                          setState(() {
+                            _selectedButtonIndex = category.key;
+                          });
+                          print('$category clicked!!');
+                        },
+                        child: Text(
+                          SubCategoryName[category.value] ?? '',
+                          style: TextStyle(
+                              fontFamily: 'Inter',
+                              color: _selectedButtonIndex == category.key ? Colors.white : Colors.black,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 12),
+                        ),
                       ),
                     ),
-                  ),
-                ))
-            .toList(),
+                  ))
+              .toList(),
+        ),
       ),
     );
   }
@@ -268,18 +274,48 @@ class _ItemsState extends State<_Items> {
                               ),
                               Positioned(
                                 height: 50.0,
-                                bottom: 0,  // 위에서 10.0의 거리를 둡니다. 필요한 경우 조절하세요.
-                                right: 0,  // 왼쪽에서 10.0의 거리를 둡니다. 필요한 경우 조절하세요.
+                                bottom: 0,
+                                right: 0,
                                 left: 0,
                                 child: Container(
-                                  padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-                                  color: Colors.black.withOpacity(0.5),  // 반투명한 배경색을 추가
-                                  child: Text(
-                                    itemMap['가격'],
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
+                                  decoration: BoxDecoration(
+                                    color: Colors.black.withOpacity(0.5),
+                                    borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(15.0),
+                                      bottomRight: Radius.circular(15.0),
                                     ),
+                                  ), // 반투명한 배경색을 추가
+                                  child: Column(
+                                    children: [
+                                      Align(
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              top: 6.23, right: 12.45),
+                                          child: Text(
+                                            itemMap['상품명'],
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                        alignment: Alignment.centerRight,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerRight,
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              bottom: 6.22, right: 12.45),
+                                          child: Text(
+                                            itemMap['가격'],
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),
