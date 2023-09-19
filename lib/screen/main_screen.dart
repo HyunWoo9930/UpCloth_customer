@@ -4,9 +4,7 @@ import 'package:upcloth/screen/mypage/mypage_screen.dart';
 import 'package:upcloth/screen/home/new_item_screen.dart';
 import 'package:upcloth/screen/request/request_screen.dart';
 import 'package:upcloth/screen/shopping/shopping_screen.dart';
-import 'package:upcloth/screen/shoppingCart/shopping_cart_screen.dart';
 
-import 'home/home_screen2.dart';
 import 'home/today_recommend_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -17,7 +15,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int _currentIndex = 2; // 첫 화면을 home_screen으로 설정하기 위함.
+  int _currentIndex = 0; // 첫 화면을 home_screen으로 설정하기 위함.
   bool showTodayRecommendScreen = false;
   bool showNewItemScreen = false;
 
@@ -36,7 +34,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     final List<Widget> _screens = [
-      HomeScreen2(
+      HomeScreen(
         showTodayRecommend: _showTodayRecommend,
         showNewItem: _showNewItem,),
       ShoppingScreen(),
