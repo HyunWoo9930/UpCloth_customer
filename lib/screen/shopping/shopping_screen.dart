@@ -26,30 +26,36 @@ class _ShoppingScreenState extends State<ShoppingScreen> {
 
     return SafeArea(
       child: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Column(
-            children: [
-              SizedBox(
-                height: 32,
+        body: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 32,
+                    ),
+                    _Headers(
+                      searchController: _searchController,
+                    ),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    _TopCategory(),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    _SubCategory(),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    _Items(),
+                  ],
+                ),
               ),
-              _Headers(
-                searchController: _searchController,
-              ),
-              const SizedBox(
-                height: 24,
-              ),
-              _TopCategory(),
-              const SizedBox(
-                height: 12,
-              ),
-              _SubCategory(),
-              const SizedBox(
-                height: 12,
-              ),
-              _Items(),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -204,7 +210,7 @@ class _Items extends StatefulWidget {
 class _ItemsState extends State<_Items> {
   Future<List<dynamic>> loadRecommendItems() async {
     final recommendItemsData =
-        await rootBundle.loadString('asset/json/new_item.json');
+        await rootBundle.loadString('asset/json/all_item.json');
     return jsonDecode(recommendItemsData);
   }
 
@@ -233,9 +239,9 @@ class _ItemsState extends State<_Items> {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TextButton(onPressed: () {print(recommendItemsList);}, child: Text("asd")),
                 GridView.builder(
                     shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
@@ -248,13 +254,35 @@ class _ItemsState extends State<_Items> {
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: InkWell(
-                          onTap: () {},
-                          child: Column(
+                          onTap: () {
+                            print('${itemMap['상품명']} clicked!!!');
+                          },
+                          child: Stack(
                             children: [
-                              Image.asset(
-                                'asset/img/${itemMap['이미지']}',
-                                fit: BoxFit.cover,
-                              )
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(20.0),
+                                child: Image.asset(
+                                  'asset/img/${itemMap['이미지']}',
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              Positioned(
+                                height: 50.0,
+                                bottom: 0,  // 위에서 10.0의 거리를 둡니다. 필요한 경우 조절하세요.
+                                right: 0,  // 왼쪽에서 10.0의 거리를 둡니다. 필요한 경우 조절하세요.
+                                left: 0,
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                                  color: Colors.black.withOpacity(0.5),  // 반투명한 배경색을 추가
+                                  child: Text(
+                                    itemMap['가격'],
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                         ),
