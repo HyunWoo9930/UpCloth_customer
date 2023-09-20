@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:upcloth/constant/color.dart';
+import 'package:upcloth/screen/shopping/shopping_screen.dart';
+import 'package:upcloth/screen/shoppingCart/shopping_cart_screen.dart';
 
 class ItemScreen extends StatefulWidget {
   final Map<String, dynamic> itemMap;
@@ -24,7 +26,14 @@ class _ItemScreenState extends State<ItemScreen> {
             height: 32.0,
             width: double.infinity,
             child: TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) {
+                    return ShoppingCartScreen();
+                  })
+                );
+                print("장바구니 클릭!!");
+              },
               style: TextButton.styleFrom(
                   backgroundColor: GREEN_COLOR,
                   primary: Colors.white,
@@ -41,13 +50,30 @@ class _ItemScreenState extends State<ItemScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
+                // 이미지
                 height: screenHeight / 2,
                 width: screenWidth,
-                child: Image.asset(
-                  'asset/img/${widget.itemMap["이미지"]}',
-                  fit: BoxFit.cover,
-                )),
+                child: Stack(fit: StackFit.expand, children: [
+                  Image.asset(
+                    'asset/img/${widget.itemMap["이미지"]}',
+                    fit: BoxFit.cover,
+                  ),
+                  Positioned(
+                    top: 32.0, // 아이콘의 상단 위치를 조정하세요.
+                    left: 20.0, // 아이콘의 왼쪽 위치를 조정하세요.
+                    child: IconButton(
+                      icon: const Icon(
+                        Icons.keyboard_arrow_left,
+                      ),
+                      iconSize: 32.0,
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  )
+                ])),
             Padding(
+              // 상품명, 가격
               padding: const EdgeInsets.only(left: 20.0, right: 20, top: 24),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -92,6 +118,7 @@ class _ItemScreenState extends State<ItemScreen> {
               ],
             ),
             Padding(
+              // 가게 설명, 판매사
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

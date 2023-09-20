@@ -16,6 +16,29 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  Future<bool> _onBackPressed() async {
+    return await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('앱을 종료하시겠습니까?'),
+        actions: <Widget>[
+          TextButton(
+            child: Text('아니오'),
+            onPressed: () {
+              Navigator.of(context).pop(false); // 다이얼로그를 닫고 false 값을 반환합니다.
+            },
+          ),
+          TextButton(
+            child: Text('예'),
+            onPressed: () {
+              Navigator.of(context).pop(true); // 다이얼로그를 닫고 true 값을 반환합니다.
+            },
+          ),
+        ],
+      ),
+    ) ?? false; // showDialog가 null을 반환할 경우 false를 반환합니다.
+  }
+
   int _currentIndex = 0; // 첫 화면을 home_screen으로 설정하기 위함.
   bool showTodayRecommendScreen = false;
   bool showNewItemScreen = false;
@@ -52,37 +75,40 @@ class _MainScreenState extends State<MainScreen> {
       MyPageScreen(),
     ];
 
-    return Scaffold(
-      body: showTodayRecommendScreen
-          ? ShoppingScreen()
-          : showNewItemScreen
-              ? ShoppingScreen()
-              : _screens[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          onItemClicked(index);
-        },
-        items: [
-          BottomNavigationBarItem(
-            label: 'home',
-            icon: SvgPicture.asset('asset/icon/home.svg', color: _currentIndex == 0 ? Color(0xFF1EA43B) : Color(0xFF888888)),
-          ),
-          BottomNavigationBarItem(
-            label: 'list',
-            icon: SvgPicture.asset('asset/icon/list.svg', color: _currentIndex == 1 ? Color(0xFF1EA43B) : Color(0xFF888888)),
-          ),
-          BottomNavigationBarItem(
-            label: 'search',
-            icon: SvgPicture.asset('asset/icon/search.svg', color: _currentIndex == 2 ? Color(0xFF1EA43B) : Color(0xFF888888)),
-          ),
-          BottomNavigationBarItem(
-            label: 'person',
-            icon: SvgPicture.asset('asset/icon/person.svg', color: _currentIndex == 3 ? Color(0xFF1EA43B) : Color(0xFF888888)),
-          ),
-        ],
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
+    return WillPopScope(
+      onWillPop: _onBackPressed,
+      child: Scaffold(
+        body: showTodayRecommendScreen
+            ? ShoppingScreen()
+            : showNewItemScreen
+                ? ShoppingScreen()
+                : _screens[_currentIndex],
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _currentIndex,
+          onTap: (index) {
+            onItemClicked(index);
+          },
+          items: [
+            BottomNavigationBarItem(
+              label: 'home',
+              icon: SvgPicture.asset('asset/icon/home.svg', color: _currentIndex == 0 ? Color(0xFF1EA43B) : Color(0xFF888888)),
+            ),
+            BottomNavigationBarItem(
+              label: 'list',
+              icon: SvgPicture.asset('asset/icon/list.svg', color: _currentIndex == 1 ? Color(0xFF1EA43B) : Color(0xFF888888)),
+            ),
+            BottomNavigationBarItem(
+              label: 'search',
+              icon: SvgPicture.asset('asset/icon/search.svg', color: _currentIndex == 2 ? Color(0xFF1EA43B) : Color(0xFF888888)),
+            ),
+            BottomNavigationBarItem(
+              label: 'person',
+              icon: SvgPicture.asset('asset/icon/person.svg', color: _currentIndex == 3 ? Color(0xFF1EA43B) : Color(0xFF888888)),
+            ),
+          ],
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+        ),
       ),
     );
   }
