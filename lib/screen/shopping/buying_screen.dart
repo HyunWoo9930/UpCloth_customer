@@ -1,35 +1,17 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:upcloth/screen/util/util.dart';
 
 import '../../constant/color.dart';
 
-class ShoppingCartScreen extends StatefulWidget {
-  const ShoppingCartScreen({super.key});
+class BuyingScreen extends StatefulWidget {
+  const BuyingScreen({super.key});
 
   @override
-  State<ShoppingCartScreen> createState() => _ShoppingCartScreenState();
+  State<BuyingScreen> createState() => _BuyingScreenState();
 }
 
-class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
+class _BuyingScreenState extends State<BuyingScreen> {
   double totalPrice = 0.0;
-
-  void updateTotalPrice(double price) {
-    setState(() {
-      totalPrice = price;
-    });
-  }
-
-  double getTextWidth(String text, TextStyle style) {
-    final textPainter = TextPainter(
-      text: TextSpan(text: text, style: style),
-      maxLines: 1,
-      textDirection: TextDirection.ltr, // 주의: 텍스트 방향은 필요에 따라 설정해야 합니다.
-    )..layout(minWidth: 0, maxWidth: double.infinity);
-
-    return textPainter.width;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +51,10 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                 width: double.infinity,
                 child: TextButton(
                   onPressed: () {
-                    print(totalPrice);
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (context) {
+                      return BuyingScreen();
+                    }));
                   },
                   style: TextButton.styleFrom(
                       backgroundColor: GREEN_COLOR,
@@ -90,56 +75,99 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
           child: ScrollConfiguration(
             behavior: NoGlowScrollBehavior(),
             child: SingleChildScrollView(
-              physics: const ClampingScrollPhysics(),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 32.0),
-                    child: Row(
-                      children: [
-                        IconButton(
-                          icon: const Icon(
-                            Icons.keyboard_arrow_left,
-                            color: Colors.black,
-                            size: 36,
-                          ),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width / 2 -
-                              (getTextWidth(
-                                          '장바구니',
-                                          const TextStyle(
-                                              fontSize: 24,
-                                              fontWeight: FontWeight.w700)) /
-                                      2 +
-                                  36 +
-                                  40),
-                        ),
-                        const Text(
-                          '장바구니',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w700, fontSize: 24),
-                        ),
-                        Spacer()
-                      ],
-                    ),
-                  ),
+                  const CustomAppBar(text: '구매하기'),
                   const Padding(
                     padding: EdgeInsets.only(top: 24.0),
                     child: Text(
                       '상품 정보',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                      style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
                     ),
                   ),
-                  _Items(
-                    path: 'asset/json/shopping_cart.json',
-                    onTotalCalculated: updateTotalPrice,
+                  _Items(path: 'asset/json/shopping_cart.json', onTotalCalculated: updateTotalPrice,),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 24.0, bottom: 12.0),
+                    child: Text(
+                      '배송 정보',
+                      style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
+                    ),
                   ),
-                  const SizedBox(height: 12,)
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12.0),
+                        border: Border.all(color: Colors.black, width: 0.3),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 0.5,
+                            blurRadius: 1,
+                            offset: const Offset(1, 1),
+                          )
+                        ]),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 12.0, left: 12.0),
+                          child: Text(
+                            '주소',
+                            style: TextStyle(
+                                fontSize: 14, fontWeight: FontWeight.w700),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              bottom: 12.04, left: 7.0, right: 6.0),
+                          child: TextField(),
+                        )
+                      ],
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 24.0, bottom: 12.0),
+                    child: Text(
+                      '결제 정보',
+                      style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
+                    ),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12.0),
+                        border: Border.all(color: Colors.black, width: 0.3),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 0.5,
+                            blurRadius: 1,
+                            offset: const Offset(1, 1),
+                          )
+                        ]),
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                          top: 15.0, left: 12.0, bottom: 14.0, right: 12.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Icon(
+                            Icons.radio_button_checked,
+                            size: 12,
+                          ),
+                          Text(
+                            '일반 결제',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700, fontSize: 14),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 230,
+                  )
                 ],
               ),
             ),
@@ -147,6 +175,12 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
         ),
       ),
     );
+  }
+
+  void updateTotalPrice(double price) {
+    setState(() {
+      totalPrice = price;
+    });
   }
 }
 
@@ -162,25 +196,12 @@ class _Items extends StatefulWidget {
 }
 
 class _ItemsState extends State<_Items> {
-  Future<List<dynamic>> loadRecommendItems() async {
-    final recommendItemsData = await rootBundle.loadString(widget.path);
-    return jsonDecode(recommendItemsData);
-  }
-
   late Future<List<dynamic>> recommendItemsListFuture;
 
   @override
   void initState() {
     super.initState();
-    recommendItemsListFuture = loadRecommendItems();
-    recommendItemsListFuture.then((items) {
-      double sum = recommendItemsList.fold(0.0, (acc, item) {
-        String priceString = item['가격'];
-        priceString = priceString.replaceAll('₩', '').replaceAll(',', '');
-        return acc + double.parse(priceString);
-      });
-      widget.onTotalCalculated(sum); // 합계 계산 후 콜백 호출
-    });
+    recommendItemsListFuture = loadJsonFromPath(widget.path);
   }
 
   late String recommendItemsData;
@@ -303,16 +324,5 @@ class _ItemsState extends State<_Items> {
         }
       },
     );
-  }
-}
-
-class NoGlowScrollBehavior extends ScrollBehavior {
-  @override
-  Widget buildViewportChrome(
-      BuildContext context,
-      Widget child,
-      AxisDirection axisDirection
-      ) {
-    return child;
   }
 }

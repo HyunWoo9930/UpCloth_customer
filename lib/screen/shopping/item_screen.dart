@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:upcloth/constant/color.dart';
 import 'package:upcloth/screen/shopping/shopping_screen.dart';
-import 'package:upcloth/screen/shoppingCart/shopping_cart_screen.dart';
+import 'package:upcloth/screen/shopping/shopping_cart_screen.dart';
 
 class ItemScreen extends StatefulWidget {
   final Map<String, dynamic> itemMap;
