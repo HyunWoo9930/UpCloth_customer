@@ -21,7 +21,7 @@ class _ItemScreenState extends State<ItemScreen> {
     return SafeArea(
       child: Scaffold(
         bottomNavigationBar: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0),
           child: SizedBox(
             height: 32.0,
             width: double.infinity,
@@ -104,7 +104,6 @@ class _ItemScreenState extends State<ItemScreen> {
                     decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(12.0),
-                        border: Border.all(color: Colors.black, width: 0.3),
                         boxShadow: [
                           BoxShadow(
                             color: Colors.grey.withOpacity(0.5),

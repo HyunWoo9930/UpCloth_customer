@@ -12,64 +12,13 @@ class BuyingScreen extends StatefulWidget {
 
 class _BuyingScreenState extends State<BuyingScreen> {
   double totalPrice = 0.0;
+  final _addressController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        bottomNavigationBar: Container(
-          color: Colors.white,
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const SizedBox(
-                height: 24,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    '합계',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 18,
-                    ),
-                  ),
-                  Text(
-                    '${totalPrice.toInt()}₩',
-                    style: const TextStyle(
-                        fontSize: 18, fontWeight: FontWeight.w500),
-                  )
-                ],
-              ),
-              const SizedBox(
-                height: 24,
-              ),
-              SizedBox(
-                height: 32.0,
-                width: double.infinity,
-                child: TextButton(
-                  onPressed: () {
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (context) {
-                      return BuyingScreen();
-                    }));
-                  },
-                  style: TextButton.styleFrom(
-                      backgroundColor: GREEN_COLOR,
-                      primary: Colors.white,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4.0))),
-                  child: const Text(
-                    '구매 하기',
-                    style: TextStyle(fontWeight: FontWeight.w700, fontSize: 12),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
+        backgroundColor: Colors.white,
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: ScrollConfiguration(
@@ -94,36 +43,49 @@ class _BuyingScreenState extends State<BuyingScreen> {
                       style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
                     ),
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12.0),
-                        border: Border.all(color: Colors.black, width: 0.3),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 0.5,
-                            blurRadius: 1,
-                            offset: const Offset(1, 1),
-                          )
-                        ]),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 12.0, left: 12.0),
-                          child: Text(
-                            '주소',
-                            style: TextStyle(
-                                fontSize: 14, fontWeight: FontWeight.w700),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 2),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(12.0),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 0.5,
+                              blurRadius: 1,
+                              offset: const Offset(1, 1),
+                            )
+                          ]),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.only(top: 12.0, left: 12.0),
+                            child: Text(
+                              '주소',
+                              style: TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.w700),
+                            ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              bottom: 12.04, left: 7.0, right: 6.0),
-                          child: TextField(),
-                        )
-                      ],
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                bottom: 12.04, left: 7.0, right: 6.0),
+                            child: TextField(
+                              controller: _addressController,
+                              decoration: const InputDecoration(
+                                filled: false,
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: GREY_COLOR)
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: GREEN_COLOR)
+                                )
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                   const Padding(
@@ -133,40 +95,92 @@ class _BuyingScreenState extends State<BuyingScreen> {
                       style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
                     ),
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12.0),
-                        border: Border.all(color: Colors.black, width: 0.3),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 0.5,
-                            blurRadius: 1,
-                            offset: const Offset(1, 1),
-                          )
-                        ]),
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          top: 15.0, left: 12.0, bottom: 14.0, right: 12.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Icon(
-                            Icons.radio_button_checked,
-                            size: 12,
-                          ),
-                          Text(
-                            '일반 결제',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w700, fontSize: 14),
-                          )
-                        ],
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 2),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(12.0),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 0.5,
+                              blurRadius: 1,
+                              offset: const Offset(1, 1),
+                            )
+                          ]),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            top: 15.0, left: 12.0, bottom: 14.0, right: 12.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Icon(
+                              Icons.radio_button_checked,
+                              size: 12,
+                            ),
+                            Text(
+                              '일반 결제',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700, fontSize: 14),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),
                   SizedBox(
-                    height: 230,
+                    height: 30,
+                  ),
+                  Container(
+                    color: Colors.white,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const SizedBox(
+                          height: 24,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                              '합계',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 18,
+                              ),
+                            ),
+                            Text(
+                              '${totalPrice.toInt()}₩',
+                              style: const TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.w500),
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 24,
+                        ),
+                        SizedBox(
+                          height: 32.0,
+                          width: double.infinity,
+                          child: TextButton(
+                            onPressed: () {
+                              print('구매하기 버튼 클릭!!');
+                            },
+                            style: TextButton.styleFrom(
+                                backgroundColor: GREEN_COLOR,
+                                primary: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(4.0))),
+                            child: const Text(
+                              '구매 하기',
+                              style: TextStyle(fontWeight: FontWeight.w700, fontSize: 12),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 12,)
+                      ],
+                    ),
                   )
                 ],
               ),
@@ -245,13 +259,11 @@ class _ItemsState extends State<_Items> {
                       final itemMap =
                           recommendItemsList[index] as Map<String, dynamic>;
                       return Padding(
-                        padding: const EdgeInsets.only(top: 12.0),
+                        padding: const EdgeInsets.only(top: 12.0, left: 2, right: 2),
                         child: Container(
                             decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(12.0),
-                                border:
-                                    Border.all(color: Colors.black, width: 0.3),
                                 boxShadow: [
                                   BoxShadow(
                                     color: Colors.grey.withOpacity(0.5),

@@ -21,59 +21,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        bottomNavigationBar: Container(
-          color: Colors.white,
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const SizedBox(
-                height: 24,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    '합계',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 18,
-                    ),
-                  ),
-                  Text(
-                    '${totalPrice.toInt()}₩',
-                    style: const TextStyle(
-                        fontSize: 18, fontWeight: FontWeight.w500),
-                  )
-                ],
-              ),
-              const SizedBox(
-                height: 24,
-              ),
-              SizedBox(
-                height: 32.0,
-                width: double.infinity,
-                child: TextButton(
-                  onPressed: () {
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (context) {
-                      return BuyingScreen();
-                    }));
-                  },
-                  style: TextButton.styleFrom(
-                      backgroundColor: GREEN_COLOR,
-                      primary: Colors.white,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4.0))),
-                  child: const Text(
-                    '구매 하기',
-                    style: TextStyle(fontWeight: FontWeight.w700, fontSize: 12),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
+        backgroundColor: Colors.white,
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: ScrollConfiguration(
@@ -98,6 +46,60 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                   ),
                   const SizedBox(
                     height: 12,
+                  ),
+                  Container(
+                    color: Colors.white,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const SizedBox(
+                          height: 24,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                              '합계',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 18,
+                              ),
+                            ),
+                            Text(
+                              '${totalPrice.toInt()}₩',
+                              style: const TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.w500),
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 24,
+                        ),
+                        SizedBox(
+                          height: 32.0,
+                          width: double.infinity,
+                          child: TextButton(
+                            onPressed: () {
+                              Navigator.of(context)
+                                  .push(MaterialPageRoute(builder: (context) {
+                                return BuyingScreen();
+                              }));
+                            },
+                            style: TextButton.styleFrom(
+                                backgroundColor: GREEN_COLOR,
+                                primary: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(4.0))),
+                            child: const Text(
+                              '구매 하기',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700, fontSize: 12),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 12,)
+                      ],
+                    ),
                   )
                 ],
               ),
@@ -132,8 +134,7 @@ class _ItemsState extends State<_Items> {
   @override
   void initState() {
     super.initState();
-    recommendItemsListFuture =
-        loadJsonFromPath(widget.path);
+    recommendItemsListFuture = loadJsonFromPath(widget.path);
   }
 
   late String recommendItemsData;
@@ -178,72 +179,73 @@ class _ItemsState extends State<_Items> {
                           recommendItemsList[index] as Map<String, dynamic>;
                       return Padding(
                         padding: const EdgeInsets.only(top: 12.0),
-                        child: Container(
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(12.0),
-                                border:
-                                    Border.all(color: Colors.black, width: 0.3),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.5),
-                                    spreadRadius: 0.5,
-                                    blurRadius: 1,
-                                    offset: const Offset(1, 1),
-                                  )
-                                ]),
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 12.0),
-                              child: Column(
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        '${itemMap['상품명']}',
-                                        style: const TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w700),
-                                      ),
-                                      IconButton(
-                                          onPressed: () {},
-                                          icon: Icon(Icons.close))
-                                    ],
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      const Text('가격'),
-                                      Text(
-                                        '${itemMap['가격']}',
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 14,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 2),
+                          child: Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(12.0),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 0.5,
+                                      blurRadius: 1,
+                                      offset: const Offset(1, 1),
+                                    )
+                                  ]),
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 12.0),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          '${itemMap['상품명']}',
+                                          style: const TextStyle(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w700),
                                         ),
-                                      )
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 12,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      const Text('수량'),
-                                      Text('${itemMap['수량']} 개',
+                                        IconButton(
+                                            onPressed: () {},
+                                            icon: Icon(Icons.close))
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        const Text('가격'),
+                                        Text(
+                                          '${itemMap['가격']}',
                                           style: const TextStyle(
                                             fontWeight: FontWeight.w400,
                                             fontSize: 14,
-                                          ))
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            )),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 12,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        const Text('수량'),
+                                        Text('${itemMap['수량']} 개',
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 14,
+                                            ))
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              )),
+                        ),
                       );
                     })
               ],
