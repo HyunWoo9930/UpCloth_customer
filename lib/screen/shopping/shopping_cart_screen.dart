@@ -19,90 +19,88 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: ScrollConfiguration(
-            behavior: NoGlowScrollBehavior(),
-            child: SingleChildScrollView(
-              physics: const ClampingScrollPhysics(),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CustomAppBar(text: '장바구니'),
-                  const Padding(
-                    padding: EdgeInsets.only(top: 24.0),
-                    child: Text(
-                      '상품 정보',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-                    ),
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: ScrollConfiguration(
+          behavior: NoGlowScrollBehavior(),
+          child: SingleChildScrollView(
+            physics: const ClampingScrollPhysics(),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CustomAppBar(text: '장바구니'),
+                const Padding(
+                  padding: EdgeInsets.only(top: 24.0),
+                  child: Text(
+                    '상품 정보',
+                    style:
+                        TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                   ),
-                  _Items(
-                    path: 'asset/json/shopping_cart.json',
-                    onTotalCalculated: updateTotalPrice,
-                  ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  Container(
-                    color: Colors.white,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const SizedBox(
-                          height: 24,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text(
-                              '합계',
-                              style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 18,
-                              ),
-                            ),
-                            Text(
-                              '${totalPrice.toInt()}₩',
-                              style: const TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.w500),
-                            )
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 24,
-                        ),
-                        SizedBox(
-                          height: 32.0,
-                          width: double.infinity,
-                          child: TextButton(
-                            onPressed: () {
-                              Navigator.of(context)
-                                  .push(MaterialPageRoute(builder: (context) {
-                                return BuyingScreen();
-                              }));
-                            },
-                            style: TextButton.styleFrom(
-                                backgroundColor: GREEN_COLOR,
-                                primary: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(4.0))),
-                            child: const Text(
-                              '구매 하기',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w700, fontSize: 12),
+                ),
+                _Items(
+                  path: 'asset/json/shopping_cart.json',
+                  onTotalCalculated: updateTotalPrice,
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                Container(
+                  color: Colors.white,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const SizedBox(
+                        height: 24,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            '합계',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 18,
                             ),
                           ),
+                          Text(
+                            '${totalPrice.toInt()}₩',
+                            style: const TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.w500),
+                          )
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 24,
+                      ),
+                      SizedBox(
+                        height: 32.0,
+                        width: double.infinity,
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.of(context)
+                                .push(MaterialPageRoute(builder: (context) {
+                              return BuyingScreen();
+                            }));
+                          },
+                          style: TextButton.styleFrom(
+                              backgroundColor: GREEN_COLOR,
+                              primary: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(4.0))),
+                          child: const Text(
+                            '구매 하기',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700, fontSize: 12),
+                          ),
                         ),
-                        SizedBox(height: 12,)
-                      ],
-                    ),
-                  )
-                ],
-              ),
+                      ),
+                      SizedBox(height: 12,)
+                    ],
+                  ),
+                )
+              ],
             ),
           ),
         ),

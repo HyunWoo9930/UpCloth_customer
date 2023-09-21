@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:upcloth/screen/mypage/order_details_screen.dart';
 import 'package:upcloth/screen/shopping/shopping_cart_screen.dart';
 import 'package:upcloth/screen/util/util.dart';
 
@@ -14,16 +15,18 @@ class _OrderListScreenState extends State<OrderListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12.0),
-        child: Column(
-          children: [
-            const CustomAppBar(text: '주문 목록'),
-            const SizedBox(
-              height: 36,
-            ),
-            _orderList(),
-          ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: Column(
+            children: [
+              const CustomAppBar(text: '주문 목록'),
+              const SizedBox(
+                height: 36,
+              ),
+              _orderList(),
+            ],
+          ),
         ),
       ),
     );
@@ -45,10 +48,10 @@ class _OrderListScreenState extends State<OrderListScreen> {
       ),
       child: TextButton(
           onPressed: () {
-            // Navigator.of(context).push(
-            //     MaterialPageRoute(builder: (BuildContext context) {
-            //   return ShoppingCartScreen();
-            // }));
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (BuildContext context) {
+              return OrderDetailScreen();
+            }));
           },
           child: const Padding(
             padding: EdgeInsets.symmetric(horizontal: 12.0),

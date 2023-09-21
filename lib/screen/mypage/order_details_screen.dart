@@ -3,14 +3,14 @@ import 'package:upcloth/screen/util/util.dart';
 
 import '../../constant/color.dart';
 
-class BuyingScreen extends StatefulWidget {
-  const BuyingScreen({super.key});
+class OrderDetailScreen extends StatefulWidget {
+  const OrderDetailScreen({super.key});
 
   @override
-  State<BuyingScreen> createState() => _BuyingScreenState();
+  State<OrderDetailScreen> createState() => _OrderDetailScreenState();
 }
 
-class _BuyingScreenState extends State<BuyingScreen> {
+class _OrderDetailScreenState extends State<OrderDetailScreen> {
   double totalPrice = 0.0;
   final _addressController = TextEditingController();
 
@@ -26,13 +26,44 @@ class _BuyingScreenState extends State<BuyingScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const CustomAppBar(text: '구매하기'),
+                Padding(
+                  padding: const EdgeInsets.only(top: 35.0),
+                  child: Row(
+                    children: [
+                      IconButton(
+                        icon: const Icon(
+                          Icons.keyboard_arrow_left,
+                          color: Colors.black,
+                          size: 36,
+                        ),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width / 2 -
+                            (getTextWidth(
+                                        '주문 상세 정보',
+                                        const TextStyle(
+                                            fontSize: 24,
+                                            fontWeight: FontWeight.w700)) /
+                                    2 +
+                                36 +
+                                40),
+                      ),
+                      const Text(
+                        '주문 상세 정보',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w700, fontSize: 24),
+                      ),
+                    ],
+                  ),
+                ),
                 const Padding(
                   padding: EdgeInsets.only(top: 24.0),
                   child: Text(
                     '상품 정보',
-                    style:
-                        TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
+                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
                   ),
                 ),
                 _Items(
@@ -43,12 +74,11 @@ class _BuyingScreenState extends State<BuyingScreen> {
                   padding: EdgeInsets.only(top: 24.0, bottom: 12.0),
                   child: Text(
                     '배송 정보',
-                    style:
-                        TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
+                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 2),
+                  padding: const EdgeInsets.symmetric(horizontal: 2),
                   child: Container(
                     decoration: BoxDecoration(
                         color: Colors.white,
@@ -61,10 +91,10 @@ class _BuyingScreenState extends State<BuyingScreen> {
                             offset: const Offset(1, 1),
                           )
                         ]),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    child: const Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        const Padding(
+                        Padding(
                           padding: EdgeInsets.only(top: 12.0, left: 12.0),
                           child: Text(
                             '주소',
@@ -73,18 +103,15 @@ class _BuyingScreenState extends State<BuyingScreen> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(
-                              bottom: 12.04, left: 7.0, right: 6.0),
-                          child: TextField(
-                            controller: _addressController,
-                            decoration: const InputDecoration(
-                                filled: false,
-                                enabledBorder: UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: GREY_COLOR)),
-                                focusedBorder: UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: GREEN_COLOR))),
+                          padding: EdgeInsets.only(
+                              bottom: 12, left: 12.0, right: 6.0, top: 12.0),
+                          child: Text(
+                            '서울특별시 중구 회현동1가 147-27',
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                              color: Color(0xFF888888),
+                            ),
                           ),
                         )
                       ],
@@ -95,8 +122,7 @@ class _BuyingScreenState extends State<BuyingScreen> {
                   padding: EdgeInsets.only(top: 24.0, bottom: 12.0),
                   child: Text(
                     '결제 정보',
-                    style:
-                        TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
+                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
                   ),
                 ),
                 Padding(
@@ -113,8 +139,8 @@ class _BuyingScreenState extends State<BuyingScreen> {
                             offset: const Offset(1, 1),
                           )
                         ]),
-                    child: Padding(
-                      padding: const EdgeInsets.only(
+                    child: const Padding(
+                      padding: EdgeInsets.only(
                           top: 15.0, left: 12.0, bottom: 14.0, right: 12.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -133,7 +159,7 @@ class _BuyingScreenState extends State<BuyingScreen> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 Container(
@@ -142,7 +168,7 @@ class _BuyingScreenState extends State<BuyingScreen> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       const SizedBox(
-                        height: 24,
+                        height: 292,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -163,28 +189,6 @@ class _BuyingScreenState extends State<BuyingScreen> {
                       ),
                       const SizedBox(
                         height: 24,
-                      ),
-                      SizedBox(
-                        height: 32.0,
-                        width: double.infinity,
-                        child: TextButton(
-                          onPressed: () {
-                            print('구매하기 버튼 클릭!!');
-                          },
-                          style: TextButton.styleFrom(
-                              backgroundColor: GREEN_COLOR,
-                              primary: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(4.0))),
-                          child: const Text(
-                            '구매 하기',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w700, fontSize: 12),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 12,
                       )
                     ],
                   ),
