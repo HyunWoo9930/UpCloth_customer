@@ -32,15 +32,20 @@ class _BuyingScreenState extends State<BuyingScreen> {
                     padding: EdgeInsets.only(top: 24.0),
                     child: Text(
                       '상품 정보',
-                      style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
+                      style:
+                          TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
                     ),
                   ),
-                  _Items(path: 'asset/json/shopping_cart.json', onTotalCalculated: updateTotalPrice,),
+                  _Items(
+                    path: 'asset/json/shopping_cart.json',
+                    onTotalCalculated: updateTotalPrice,
+                  ),
                   const Padding(
                     padding: EdgeInsets.only(top: 24.0, bottom: 12.0),
                     child: Text(
                       '배송 정보',
-                      style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
+                      style:
+                          TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
                     ),
                   ),
                   Padding(
@@ -74,14 +79,13 @@ class _BuyingScreenState extends State<BuyingScreen> {
                             child: TextField(
                               controller: _addressController,
                               decoration: const InputDecoration(
-                                filled: false,
-                                enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: GREY_COLOR)
-                                ),
-                                focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: GREEN_COLOR)
-                                )
-                              ),
+                                  filled: false,
+                                  enabledBorder: UnderlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: GREY_COLOR)),
+                                  focusedBorder: UnderlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: GREEN_COLOR))),
                             ),
                           )
                         ],
@@ -92,7 +96,8 @@ class _BuyingScreenState extends State<BuyingScreen> {
                     padding: EdgeInsets.only(top: 24.0, bottom: 12.0),
                     child: Text(
                       '결제 정보',
-                      style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
+                      style:
+                          TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
                     ),
                   ),
                   Padding(
@@ -174,11 +179,14 @@ class _BuyingScreenState extends State<BuyingScreen> {
                                     borderRadius: BorderRadius.circular(4.0))),
                             child: const Text(
                               '구매 하기',
-                              style: TextStyle(fontWeight: FontWeight.w700, fontSize: 12),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700, fontSize: 12),
                             ),
                           ),
                         ),
-                        const SizedBox(height: 12,)
+                        const SizedBox(
+                          height: 12,
+                        )
                       ],
                     ),
                   )
@@ -259,7 +267,8 @@ class _ItemsState extends State<_Items> {
                       final itemMap =
                           recommendItemsList[index] as Map<String, dynamic>;
                       return Padding(
-                        padding: const EdgeInsets.only(top: 12.0, left: 2, right: 2),
+                        padding:
+                            const EdgeInsets.only(top: 12.0, left: 2, right: 2),
                         child: Container(
                             decoration: BoxDecoration(
                                 color: Colors.white,

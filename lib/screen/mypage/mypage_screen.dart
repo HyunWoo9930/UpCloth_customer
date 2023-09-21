@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:upcloth/screen/mypage/order_list_screen.dart';
 import 'package:upcloth/screen/mypage/request_manage_screen.dart';
+import 'package:upcloth/screen/shopping/shopping_cart_screen.dart';
 import 'package:upcloth/screen/util/util.dart';
 
 class MyPageScreen extends StatelessWidget {
@@ -213,9 +215,17 @@ class MyPageScreen extends StatelessWidget {
             }));
           }),
           _line(),
-          _settingTextButton('장바구니', () {}),
+          _settingTextButton('장바구니', () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+              return ShoppingCartScreen();
+            }));
+          }),
           _line(),
-          _settingTextButton('주문 목록', () {}),
+          _settingTextButton('주문 목록', () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+              return OrderListScreen();
+            }));
+          }),
           _line(),
           _settingTextButton('고객 센터', () {})
         ],
