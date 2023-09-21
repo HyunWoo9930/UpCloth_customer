@@ -36,7 +36,7 @@ class MyPageScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                _settings(),
+                _settings(context),
                 const Padding(
                   padding: EdgeInsets.only(top: 24.0, bottom: 12.0),
                   child: Text(
@@ -121,13 +121,90 @@ class MyPageScreen extends StatelessWidget {
     );
   }
 
-  Widget _settings() {
+  Widget _settings(BuildContext context) {
     return Container(
       decoration: whiteContainerDecoration(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          _settingTextButton('프로필 수정', () {}),
+          _settingTextButton('프로필 수정', () {
+            showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return Stack(
+                    children: [
+                      const Opacity(
+                        opacity: 0.3,
+                        child: ModalBarrier(
+                          dismissible: true,
+                          color: Color(0xFF000000),
+                        ),
+                      ),
+                      Center(
+                        child: Container(
+                          width: MediaQuery.of(context).size.width - 40,
+                          height: MediaQuery.of(context).size.height / 7.5,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8.0),
+                            color: Colors.white,
+                          ),
+                          padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                          child: Material(
+                            type: MaterialType.transparency,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Padding(
+                                  padding: EdgeInsets.only(top: 12.0),
+                                  child: Text(
+                                    '닉네임 변경',
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 12.0, bottom: 12),
+                                  child: Row(
+                                    children: [
+                                      const Flexible(
+                                        child: TextField(
+                                          maxLines: 1,
+                                          minLines: 1,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 12,
+                                      ),
+                                      TextButton(
+                                        onPressed: () {},
+                                        style: TextButton.styleFrom(
+                                          backgroundColor:
+                                              const Color(0xff1da33b),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(4.0)),
+                                        ),
+                                        child: const Text(
+                                          '변경',
+                                          style: TextStyle(
+                                              fontSize: 12,
+                                              color: Colors.white),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                });
+          }),
           _line(),
           _settingTextButton('의뢰 관리', () {}),
           _line(),
