@@ -71,3 +71,17 @@ class NoGlowScrollBehavior extends ScrollBehavior {
     return child;
   }
 }
+
+BoxDecoration whiteContainerDecoration() {
+  return BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(12.0),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.grey.withOpacity(0.5),
+          spreadRadius: 0.5,
+          blurRadius: 1,
+          offset: const Offset(1, 1),
+        ),
+      ]);
+}
