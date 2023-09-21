@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:upcloth/screen/mypage/request_manage_screen.dart';
 import 'package:upcloth/screen/util/util.dart';
 
 class MyPageScreen extends StatelessWidget {
@@ -206,7 +207,11 @@ class MyPageScreen extends StatelessWidget {
                 });
           }),
           _line(),
-          _settingTextButton('의뢰 관리', () {}),
+          _settingTextButton('의뢰 관리', () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+              return RequestManageScreen();
+            }));
+          }),
           _line(),
           _settingTextButton('장바구니', () {}),
           _line(),
