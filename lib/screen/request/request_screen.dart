@@ -54,7 +54,6 @@ class _RequestScreenState extends State<RequestScreen> {
                     }
                   }
                 };
-                return LoginScreenCustomer();
                 return StoreListScreen(data: myMap);
               }));
             },
