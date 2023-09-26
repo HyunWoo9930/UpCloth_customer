@@ -19,9 +19,9 @@ class _StoreListScreenState extends State<StoreListScreen> {
     String? cityName = widget.data["시/도"]["시/군/구"]["이름"];
     String? neighborhoodName = widget.data["시/도"]["시/군/구"]["읍/면/동"]["이름"];
     String location = "";
-    if (regionName != null) {
-      if (cityName != null) {
-        if (neighborhoodName != null) {
+    if (regionName != null && regionName.isNotEmpty) {
+      if (cityName != null && cityName.isNotEmpty) {
+        if (neighborhoodName != null && neighborhoodName.isNotEmpty) {
           location = "$regionName > $cityName > $neighborhoodName";
         } else {
           location = "$regionName > $cityName";
@@ -67,6 +67,7 @@ class _StoreListScreenState extends State<StoreListScreen> {
               ),
             ],
           ),
+          const SizedBox(height: 24),
           Expanded(
             child: ScrollConfiguration(
               behavior: NoGlowScrollBehavior(),
@@ -81,57 +82,54 @@ class _StoreListScreenState extends State<StoreListScreen> {
                           return const RequestStoreDetailScreen();
                         }));
                       },
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 24),
-                        child: Container(
-                          width: double.infinity,
-                          height: 260,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: Colors.white),
-                          child: Column(
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(12.0),
-                                child: Image.asset(
-                                  'asset/img/request_test1.png',
-                                  fit: BoxFit.cover,
-                                ),
+                      child: Container(
+                        width: double.infinity,
+                        height: 260,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: Colors.white),
+                        child: Column(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(12.0),
+                              child: Image.asset(
+                                'asset/img/request_test1.png',
+                                fit: BoxFit.cover,
                               ),
-                              Container(
-                                padding:
-                                    const EdgeInsets.only(left: 8, right: 22),
-                                child: const Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      '우리동네 수선집',
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 18,
-                                          fontFamily: 'Inter',
-                                          fontWeight: FontWeight.w700),
+                            ),
+                            Container(
+                              padding:
+                                  const EdgeInsets.only(left: 8, right: 22),
+                              child: const Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    '우리동네 수선집',
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 18,
+                                        fontFamily: 'Inter',
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.only(top: 12, bottom: 8),
+                                    child: Row(
+                                      children: [
+                                        StoreTag(text: '수선'),
+                                        SizedBox(width: 12),
+                                        StoreTag(text: '리디자인')
+                                      ],
                                     ),
-                                    Padding(
-                                      padding:
-                                          EdgeInsets.only(top: 12, bottom: 8),
-                                      child: Row(
-                                        children: [
-                                          StoreTag(text: '수선'),
-                                          SizedBox(width: 12),
-                                          StoreTag(text: '리디자인')
-                                        ],
-                                      ),
-                                    ),
-                                    RequestTextFormWidget(
-                                        text:
-                                            '우리동네 수선집! 오래된 옷도 새것처럼. 정성스런 손봉사로 고객님의 마음까지 포근하게 해드립니다. 신뢰와 품질로 대화해요',
-                                        isTitle: false),
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
+                                  ),
+                                  RequestTextFormWidget(
+                                      text:
+                                          '우리동네 수선집! 오래된 옷도 새것처럼. 정성스런 손봉사로 고객님의 마음까지 포근하게 해드립니다. 신뢰와 품질로 대화해요',
+                                      isTitle: false),
+                                ],
+                              ),
+                            )
+                          ],
                         ),
                       ),
                     ),
