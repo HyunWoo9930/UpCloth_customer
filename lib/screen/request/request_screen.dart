@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter/services.dart';
 import 'package:upcloth/constant/color.dart';
-import 'package:upcloth/screen/login_screen_customer.dart';
 import 'package:upcloth/screen/request/store_list_screen.dart';
 import '../util/util.dart';
 
@@ -118,7 +117,7 @@ class City {
 class RegionListWidget extends StatefulWidget {
   final RegionData regionData;
 
-  RegionListWidget({required this.regionData});
+  const RegionListWidget({super.key, required this.regionData});
 
   @override
   _RegionListWidgetState createState() => _RegionListWidgetState();
@@ -207,7 +206,6 @@ class _RegionListWidgetState extends State<RegionListWidget> {
                 Padding(
                   padding: const EdgeInsets.only(right: 16.0),
                   child: Container(
-                    // width: 74,
                     height: 32,
                     decoration: ShapeDecoration(
                       color: selectedCityIndex == cityIndex
@@ -225,16 +223,6 @@ class _RegionListWidgetState extends State<RegionListWidget> {
                       ],
                     ),
                     child: TextButton(
-                      // style: TextButton.styleFrom(
-                      //     primary: Colors.white,
-                      //     backgroundColor: selectedCityIndex == cityIndex
-                      //         ? Colors.green
-                      //         : Colors.white,
-                      //     shape: RoundedRectangleBorder(
-                      //         borderRadius: BorderRadius.circular(12.0),
-                      //         side: BorderSide.none),
-                      //     elevation: 8,
-                      //     shadowColor: Colors.black),
                       onPressed: () {
                         setState(() {
                           selectedCityIndex = cityIndex;

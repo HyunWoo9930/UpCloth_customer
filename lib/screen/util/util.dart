@@ -85,3 +85,72 @@ BoxDecoration whiteContainerDecoration() {
         ),
       ]);
 }
+
+class StoreTag extends StatelessWidget {
+  final String text;
+
+  const StoreTag({super.key, required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 40,
+      height: 16,
+      decoration: ShapeDecoration(
+        color: Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        shadows: const [
+          BoxShadow(
+            color: Color(0x3F000000),
+            blurRadius: 4,
+            offset: Offset(1, 1),
+            spreadRadius: 0,
+          )
+        ],
+      ),
+      child: const Center(
+        child: Text(
+          '리디자인',
+          style: TextStyle(
+              fontWeight: FontWeight.w700,
+              fontFamily: 'Inter',
+              fontSize: 6,
+              color: Colors.black),
+        ),
+      ),
+    );
+  }
+}
+
+class RequestTextFormWidget extends StatelessWidget {
+  final String text;
+  final bool isTitle;
+
+  const RequestTextFormWidget({super.key, required this.text, required this.isTitle});
+
+  final TextStyle titleStyleForm = const TextStyle(
+      color: Colors.black,
+      fontSize: 12,
+      fontFamily: 'Inter',
+      fontWeight: FontWeight.w700);
+  final TextStyle bodyStyleForm = const TextStyle(
+      color: Color(0xFF838383),
+      fontSize: 10,
+      fontFamily: 'Inter',
+      fontWeight: FontWeight.w500);
+
+  @override
+  Widget build(BuildContext context) {
+    if (isTitle) {
+      return Text(
+        text,
+        style: titleStyleForm,
+      );
+    } else {
+      return Text(
+        text,
+        style: bodyStyleForm,
+      );
+    }
+  }
+}
