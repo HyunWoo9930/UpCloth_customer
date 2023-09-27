@@ -13,12 +13,11 @@ class _RequestChattingScreenState extends State<RequestChattingScreen> {
   final TextEditingController _messageController = TextEditingController();
 
   void _sendMessage() {
-    // 메시지를 보내는 로직을 구현하세요.
     String message = _messageController.text;
     if (message.isNotEmpty) {
-      // 여기에서 메시지를 전송하거나 처리할 수 있습니다.
+      // 메시지 전송 및 처리 로직
       print('보낸 메시지: $message');
-      // 메시지를 전송한 후 입력창 비우기
+      // 메시지 전송 시 메시지 창 클리어
       _messageController.clear();
     }
   }
@@ -107,7 +106,7 @@ class _RequestChattingScreenState extends State<RequestChattingScreen> {
             ),
             Padding(
               padding: const EdgeInsets.only(bottom: 12),
-              child: Container(
+              child: SizedBox(
                 height: 48,
                 child: Expanded(
                   child: TextField(

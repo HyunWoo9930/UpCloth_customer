@@ -75,125 +75,18 @@ class _StoreListScreenState extends State<StoreListScreen> {
                 scrollDirection: Axis.vertical,
                 child: Column(
                   children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute(builder: (context) {
-                          return const RequestStoreDetailScreen();
-                        }));
-                      },
-                      child: Container(
-                        width: double.infinity,
-                        height: 260,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            color: Colors.white),
-                        child: Column(
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(12.0),
-                              child: Image.asset(
-                                'asset/img/request_test1.png',
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            Container(
-                              padding:
-                                  const EdgeInsets.only(left: 8, right: 22),
-                              child: const Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    '우리동네 수선집',
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 18,
-                                        fontFamily: 'Inter',
-                                        fontWeight: FontWeight.w700),
-                                  ),
-                                  Padding(
-                                    padding:
-                                        EdgeInsets.only(top: 12, bottom: 8),
-                                    child: Row(
-                                      children: [
-                                        StoreTag(text: '수선'),
-                                        SizedBox(width: 12),
-                                        StoreTag(text: '리디자인')
-                                      ],
-                                    ),
-                                  ),
-                                  RequestTextFormWidget(
-                                      text:
-                                          '우리동네 수선집! 오래된 옷도 새것처럼. 정성스런 손봉사로 고객님의 마음까지 포근하게 해드립니다. 신뢰와 품질로 대화해요',
-                                      isTitle: false),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute(builder: (context) {
-                          return const RequestStoreDetailScreen();
-                        }));
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 24),
-                        child: Container(
-                          width: double.infinity,
-                          height: 260,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: Colors.white),
-                          child: Column(
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(12.0),
-                                child: Image.asset(
-                                  'asset/img/request_test2.png',
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              Container(
-                                padding:
-                                    const EdgeInsets.only(left: 8, right: 22),
-                                child: const Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      '업클로스',
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 18,
-                                          fontFamily: 'Inter',
-                                          fontWeight: FontWeight.w700),
-                                    ),
-                                    Padding(
-                                      padding:
-                                          EdgeInsets.only(top: 12, bottom: 8),
-                                      child: Row(
-                                        children: [
-                                          StoreTag(text: '수선'),
-                                          SizedBox(width: 12),
-                                          StoreTag(text: '리디자인')
-                                        ],
-                                      ),
-                                    ),
-                                    RequestTextFormWidget(
-                                        text:
-                                            '우리동네 수선집! 오래된 옷도 새것처럼. 정성스런 손봉사로 고객님의 마음까지 포근하게 해드립니다. 신뢰와 품질로 대화해요',
-                                        isTitle: false)
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
+                    _StoreWidget(
+                        Image.asset('asset/img/request_test1.png',
+                            fit: BoxFit.cover),
+                        '우리동네 수선집',
+                        ['리디자인', '수선'],
+                        '우리동네 수선집! 오래된 옷도 새것처럼. 정성스런 손봉사로 고객님의 마음까지 포근하게 해드립니다. 신뢰와 품질로 대화해요'),
+                    _StoreWidget(
+                        Image.asset('asset/img/request_test2.png',
+                            fit: BoxFit.cover),
+                        '업클로스',
+                        ['리디자인', '수선'],
+                        '우리동네 수선집! 오래된 옷도 새것처럼. 정성스런 손봉사로 고객님의 마음까지 포근하게 해드립니다. 신뢰와 품질로 대화해요'),
                     Padding(
                       padding: const EdgeInsets.only(top: 24),
                       child: Container(
@@ -210,6 +103,69 @@ class _StoreListScreenState extends State<StoreListScreen> {
             ),
           )
         ]),
+      ),
+    );
+  }
+
+  Widget _StoreWidget(
+      Image image, String storeName, List<String> tagList, String storeText) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+          return const RequestStoreDetailScreen();
+        }));
+      },
+      child: Padding(
+        padding: const EdgeInsets.only(top: 24),
+        child: Container(
+          width: double.infinity,
+          height: 260,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8), color: Colors.white),
+          child: Column(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(12.0),
+                child: image,
+              ),
+              Container(
+                padding: const EdgeInsets.only(left: 8, right: 22),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      storeName,
+                      style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 18,
+                          fontFamily: 'Inter',
+                          fontWeight: FontWeight.w700),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 12, bottom: 8),
+                      child: Row(
+                        children: [
+                          for (int i = 0; i < tagList.length; i++)
+                            Row(
+                              children: [
+                                StoreTag(text: tagList[i]),
+                                if (i < tagList.length - 1)
+                                  const SizedBox(width: 12),
+                              ],
+                            )
+                          // StoreTag(text: '수선'),
+                          // SizedBox(width: 12),
+                          // StoreTag(text: '리디자인')
+                        ],
+                      ),
+                    ),
+                    RequestTextFormWidget(text: storeText, isTitle: false)
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }
